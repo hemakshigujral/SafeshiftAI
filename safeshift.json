@@ -1,0 +1,232 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-26T08:30:00.000Z",
+  "metrics": {
+    "totalWorkers": 248,
+    "activeShifts": 86,
+    "pending": 12,
+    "swaps": 8,
+    "pto": 4,
+    "rebalanceApplied": false
+  },
+  "operations": {
+    "nightLineFilled": false
+  },
+  "settings": {
+    "criticalAlerts": true,
+    "aiDispatch": true,
+    "workerNudges": false
+  },
+  "workers": [
+    {
+      "id": "arjun-mehta",
+      "name": "Arjun Mehta",
+      "role": "Forklift Operator",
+      "facility": "Plant 1 · Assembly",
+      "shift": "Night · 22:00–06:00",
+      "risk": 88,
+      "duty": "14h duty window",
+      "status": "Needs relief"
+    },
+    {
+      "id": "sneha-iyer",
+      "name": "Sneha Iyer",
+      "role": "Assembly Associate",
+      "facility": "Line 2 · Fabrication",
+      "shift": "Evening · 14:00–22:00",
+      "risk": 76,
+      "duty": "6.5h rest turnaround",
+      "status": "Rest deficit"
+    },
+    {
+      "id": "vikram-singh",
+      "name": "Vikram Singh",
+      "role": "Maintenance Technician",
+      "facility": "Robotics Bay 4",
+      "shift": "Night · 23:00–07:00",
+      "risk": 81,
+      "duty": "5th night shift",
+      "status": "Night limit"
+    },
+    {
+      "id": "priya-nair",
+      "name": "Priya Nair",
+      "role": "QA Inspector",
+      "facility": "Plant 1 · Quality",
+      "shift": "Morning · 06:00–14:00",
+      "risk": 42,
+      "duty": "Within safe threshold",
+      "status": "Ready"
+    },
+    {
+      "id": "rohan-kulkarni",
+      "name": "Rohan Kulkarni",
+      "role": "Dispatch Lead",
+      "facility": "Plant 2 · Logistics",
+      "shift": "Evening · 14:00–22:00",
+      "risk": 58,
+      "duty": "Elevated overtime",
+      "status": "Monitor"
+    },
+    {
+      "id": "meera-joshi",
+      "name": "Meera Joshi",
+      "role": "Welding Specialist",
+      "facility": "Plant 3 · Fabrication",
+      "shift": "Morning · 06:00–14:00",
+      "risk": 33,
+      "duty": "Within safe threshold",
+      "status": "Ready"
+    },
+    {
+      "id": "aditya-verma",
+      "name": "Aditya Verma",
+      "role": "Cold Storage Operator",
+      "facility": "Zone B · Cold Storage",
+      "shift": "Night · 22:00–06:00",
+      "risk": 71,
+      "duty": "Certification coverage",
+      "status": "Monitor"
+    },
+    {
+      "id": "kavya-menon",
+      "name": "Kavya Menon",
+      "role": "Robotics Operator",
+      "facility": "Robotics Bay 4",
+      "shift": "Morning · 06:00–14:00",
+      "risk": 27,
+      "duty": "Within safe threshold",
+      "status": "Ready"
+    },
+    {
+      "id": "rahul-desai",
+      "name": "Rahul Desai",
+      "role": "Press Operator",
+      "facility": "Plant 1 · Stamping",
+      "shift": "Evening · 14:00–22:00",
+      "risk": 63,
+      "duty": "Moderate overtime",
+      "status": "Monitor"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "arjun",
+      "title": "Arjun Mehta",
+      "meta": "(Forklift Op - Plant 1)",
+      "chip": "Risk 88/100",
+      "severity": "critical",
+      "copy": "14h consecutive duty window. Sensor metrics indicate reaction time decay (+340ms).",
+      "note": "Action: Dispatch Relief",
+      "action": "Swap Now",
+      "dashboard": true,
+      "active": true
+    },
+    {
+      "id": "sneha",
+      "title": "Sneha Iyer",
+      "meta": "(Assembly Line 2)",
+      "chip": "Rest Deficit",
+      "severity": "critical",
+      "copy": "Insufficient rest turnaround: scheduled 6.5 hrs between evening & morning shifts (Min: 11 hrs OSHA).",
+      "note": "Delay Start to 10:00 AM",
+      "action": "Adjust Start",
+      "dashboard": true,
+      "active": true
+    },
+    {
+      "id": "vikram",
+      "title": "Vikram Singh",
+      "meta": "(Maintenance Tech)",
+      "chip": "Night Limit",
+      "severity": "moderate",
+      "copy": "5th consecutive night shift limit reached. Circadian strain model indicates severe micro-sleep risk.",
+      "note": "Rotate to Day Off",
+      "action": "Approve Rest",
+      "dashboard": true,
+      "active": true
+    },
+    {
+      "id": "coldstorage",
+      "title": "Cold Storage Zone B",
+      "meta": "(Logistics)",
+      "chip": "Deficit: 2 Cert",
+      "severity": "critical",
+      "copy": "Only 2 certified cold-storage forklift drivers on duty for upcoming 80-ton shipment receiving.",
+      "note": "Overwork Danger",
+      "action": "Call Standby",
+      "dashboard": true,
+      "active": true
+    },
+    {
+      "id": "neha",
+      "title": "Neha Kapoor",
+      "meta": "(Packaging Line 3)",
+      "chip": "Overtime 8.2h",
+      "severity": "moderate",
+      "copy": "Weekly overtime threshold exceeded. Recommend moving the final two hours to verified standby coverage.",
+      "note": "Recommend shift trim",
+      "action": "Review",
+      "dashboard": false,
+      "active": true
+    },
+    {
+      "id": "conveyor",
+      "title": "Conveyor 3",
+      "meta": "(Plant 1 · Dispatch)",
+      "chip": "Sensor Drift",
+      "severity": "moderate",
+      "copy": "Vibration variance is 18% above baseline. Maintenance window is available during the next rotation.",
+      "note": "Inspect bearing assembly",
+      "action": "Schedule",
+      "dashboard": false,
+      "active": true
+    },
+    {
+      "id": "nightline",
+      "title": "Night Line Prep",
+      "meta": "(Cold Storage Zone B)",
+      "chip": "Staffing Risk",
+      "severity": "moderate",
+      "copy": "Two forklift positions remain unfilled for the 22:00 receiving window. Standby pool has three eligible operators.",
+      "note": "Assign standby relief",
+      "action": "Fill Gap",
+      "dashboard": false,
+      "active": true
+    }
+  ],
+  "requests": [
+    {
+      "id": "request-1",
+      "worker": "Rohan Kulkarni",
+      "type": "Shift swap",
+      "detail": "Evening rotation · Oct 18 · receive Morning rotation"
+    },
+    {
+      "id": "request-2",
+      "worker": "Priya Nair",
+      "type": "PTO review",
+      "detail": "Personal leave · Oct 22–24 · coverage verified"
+    },
+    {
+      "id": "request-3",
+      "worker": "Aditya Verma",
+      "type": "Shift swap",
+      "detail": "Night rotation · Oct 20 · cold-storage certified peer"
+    },
+    {
+      "id": "request-4",
+      "worker": "Isha Sharma",
+      "type": "Rest adjustment",
+      "detail": "Delay start to 10:00 AM after 6.5h turnaround"
+    }
+  ],
+  "activity": [
+    {
+      "id": "activity-seed-1",
+      "type": "system",
+      "message": "Live operational data initialized.",
+      "at": "2026-10-26T08:30:00.000Z"
+    }
+  ]
+}
