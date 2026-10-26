@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SafeShift AI predictive workforce safety operations dashboard."
+    />
+    <meta name="theme-color" content="#00236f" />
+    <title>SafeShift AI | Predictive Ops</title>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <defs>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.2 16.2 4.3 4.3"></path>
+        </symbol>
+        <symbol id="i-dashboard" viewBox="0 0 24 24">
+          <rect x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect>
+          <rect x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect>
+          <rect x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect>
+          <rect x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect>
+        </symbol>
+        <symbol id="i-workers" viewBox="0 0 24 24">
+          <circle cx="9" cy="8" r="3.2"></circle>
+          <path d="M3.5 19.5c.4-3.6 2.3-5.7 5.5-5.7s5.1 2.1 5.5 5.7"></path>
+          <path d="M16 5.2a3.1 3.1 0 0 1 0 6"></path>
+          <path d="M17.2 14.3c2.1.5 3.1 2.2 3.3 5.2"></path>
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24">
+          <rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect>
+          <path d="M7.5 3v4M16.5 3v4M3.5 9.5h17"></path>
+          <path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"></path>
+        </symbol>
+        <symbol id="i-swap" viewBox="0 0 24 24">
+          <path d="M4 7h14"></path>
+          <path d="m14 3 4 4-4 4"></path>
+          <path d="M20 17H6"></path>
+          <path d="m10 13-4 4 4 4"></path>
+        </symbol>
+        <symbol id="i-brain" viewBox="0 0 24 24">
+          <path d="M9.3 4.1A3.1 3.1 0 0 0 4.8 7a3 3 0 0 0-1 5.6 3.2 3.2 0 0 0 2 5.5h.7a3.2 3.2 0 0 0 5.6 1.2V4.9a3 3 0 0 0-2.8-.8Z"></path>
+          <path d="M14.7 4.1A3.1 3.1 0 0 1 19.2 7a3 3 0 0 1 1 5.6 3.2 3.2 0 0 1-2 5.5h-.7a3.2 3.2 0 0 1-5.6 1.2V4.9a3 3 0 0 1 2.8-.8Z"></path>
+          <path d="M7.5 8.2c1.1-.1 1.9.4 2.3 1.3M16.5 8.2c-1.1-.1-1.9.4-2.3 1.3M7.4 14.3c1 .1 1.8-.3 2.3-1M16.6 14.3c-1 .1-1.8-.3-2.3-1"></path>
+        </symbol>
+        <symbol id="i-warning" viewBox="0 0 24 24">
+          <path d="m12 3.6 8.5 15.1a1.2 1.2 0 0 1-1 1.8h-15a1.2 1.2 0 0 1-1-1.8L12 3.6Z"></path>
+          <path d="M12 9v4.7M12 17.2h.01"></path>
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+          <path d="M4 20V4M4 20h16"></path>
+          <path d="m7 15 4-5 3.5 2.5L20 6"></path>
+          <path d="M17 6h3v3"></path>
+        </symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.2 15.1a1.8 1.8 0 0 0 .4 2l.1.1-2.5 2.5-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7v.2h-3.6v-.2a1.8 1.8 0 0 0-1.1-1.7 1.8 1.8 0 0 0-2 .4l-.1.1-2.5-2.5.1-.1a1.8 1.8 0 0 0 .4-2 1.8 1.8 0 0 0-1.7-1.1H3v-3.6h.5a1.8 1.8 0 0 0 1.7-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1 2.5-2.5.1.1a1.8 1.8 0 0 0 2 .4 1.8 1.8 0 0 0 1.1-1.7v-.2h3.6v.2a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1 2.5 2.5-.1.1a1.8 1.8 0 0 0-.4 2 1.8 1.8 0 0 0 1.7 1.1h.5v3.6h-.5a1.8 1.8 0 0 0-1.7 1.1Z"></path>
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 10.5v5M12 7.5h.01"></path>
+        </symbol>
+        <symbol id="i-help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M9.8 9a2.3 2.3 0 1 1 3.5 2c-.8.5-1.3 1-1.3 2M12 16.8h.01"></path>
+        </symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24">
+          <path d="M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10"></path>
+          <path d="M14 8l4 4-4 4M8 12h10"></path>
+        </symbol>
+        <symbol id="i-sync" viewBox="0 0 24 24">
+          <path d="M20 7v5h-5"></path>
+          <path d="M4 17v-5h5"></path>
+          <path d="M6.1 8A7 7 0 0 1 19.6 7M4.4 17A7 7 0 0 0 17.9 16"></path>
+        </symbol>
+        <symbol id="i-factory" viewBox="0 0 24 24">
+          <path d="M3.5 20V9.5l5.2 2.8V9.5l5.2 2.8V8.7L20.5 12v8"></path>
+          <path d="M3.5 20h17M7 16.5h2M12 16.5h2M17 16.5h.5"></path>
+        </symbol>
+        <symbol id="i-person-add" viewBox="0 0 24 24">
+          <circle cx="9" cy="8" r="3.2"></circle>
+          <path d="M3.5 19.5c.4-3.6 2.3-5.7 5.5-5.7 3.2 0 5.1 2.1 5.5 5.7M18 8v6M15 11h6"></path>
+        </symbol>
+        <symbol id="i-file" viewBox="0 0 24 24">
+          <path d="M5 3.5h9l5 5v12H5v-17Z"></path>
+          <path d="M14 3.5v5h5M8 13h8M8 16.5h6"></path>
+        </symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24">
+          <path d="M18 9a6 6 0 0 0-12 0c0 7-2.5 7-2.5 8.5h17C20.5 16 18 16 18 9Z"></path>
+          <path d="M9.5 20a2.8 2.8 0 0 0 5 0"></path>
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14"></path>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 7v5l3.3 2"></path>
+        </symbol>
+        <symbol id="i-engineering" viewBox="0 0 24 24">
+          <circle cx="12" cy="10" r="3.5"></circle>
+          <path d="M5.5 20c.3-4.1 2.5-6.1 6.5-6.1s6.2 2 6.5 6.1"></path>
+          <path d="M5.2 10.2a6.8 6.8 0 0 1 13.6 0M9.2 4.2h5.6"></path>
+        </symbol>
+        <symbol id="i-swap-horizontal" viewBox="0 0 24 24">
+          <path d="M4 7.5h15M15.5 4l3.5 3.5-3.5 3.5M20 16.5H5M8.5 13 5 16.5 8.5 20"></path>
+        </symbol>
+        <symbol id="i-alarm" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7.5"></circle>
+          <path d="M12 9v4.5l3 1.8M5 4 2.5 6.5M19 4l2.5 2.5M4 20l1.5 1.5M20 20l-1.5 1.5"></path>
+        </symbol>
+        <symbol id="i-robot" viewBox="0 0 24 24">
+          <rect x="4" y="7" width="16" height="12" rx="3"></rect>
+          <path d="M12 3v4M8.5 3h7M9 12h.01M15 12h.01M8 16h8M2.5 11v4M21.5 11v4"></path>
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="M12 3 20 6v5.9c0 4.7-3.2 7.9-8 9.8-4.8-1.9-8-5.1-8-9.8V6l8-3Z"></path>
+          <path d="m8.5 12 2.3 2.4 4.8-5.4"></path>
+        </symbol>
+        <symbol id="i-verified" viewBox="0 0 24 24">
+          <path d="m12 2.8 2.2 1.6 2.7-.1 1 2.6 2 1.8-.9 2.6.9 2.6-2 1.8-1 2.6-2.7-.1L12 21.2l-2.2-1.6-2.7.1-1-2.6-2-1.8.9-2.6-.9-2.6 2-1.8 1-2.6 2.7.1L12 2.8Z"></path>
+          <path d="m8.5 12 2.3 2.3 4.7-5"></path>
+        </symbol>
+        <symbol id="i-chevron-right" viewBox="0 0 24 24">
+          <path d="m9 5 7 7-7 7"></path>
+        </symbol>
+        <symbol id="i-chevron-down" viewBox="0 0 24 24">
+          <path d="m5 9 7 7 7-7"></path>
+        </symbol>
+        <symbol id="i-arrow-right" viewBox="0 0 24 24">
+          <path d="M4 12h15M14 7l5 5-5 5"></path>
+        </symbol>
+        <symbol id="i-sparkles" viewBox="0 0 24 24">
+          <path d="m12 2 1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5L12 2Z"></path>
+          <path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14Z"></path>
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="m13.2 2-8 11h6.5L10.8 22l8-11h-6.5l.9-9Z"></path>
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12M7 10l5 5 5-5M4 20h16"></path>
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+          <path d="m5 5 14 14M19 5 5 19"></path>
+        </symbol>
+        <symbol id="i-filter" viewBox="0 0 24 24">
+          <path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z"></path>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4.5 4.5L19 7"></path>
+        </symbol>
+        <symbol id="i-dots" viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1"></circle>
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="app-shell">
+      <div class="mobile-backdrop" id="mobileBackdrop" hidden></div>
+
+      <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+        <div>
+          <a class="brand" href="#dashboard" data-view-link="dashboard" aria-label="SafeShift AI dashboard">
+            <img src="assets/logo.svg" alt="" class="brand__mark" />
+            <span class="brand__copy">
+              <strong>SafeShift AI</strong>
+              <small>Predictive Ops</small>
+            </span>
+          </a>
+
+          <nav class="nav">
+            <a class="nav__item is-active" href="#dashboard" data-view-link="dashboard" aria-current="page">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-dashboard"></use></svg>
+                <span>Dashboard</span>
+              </span>
+              <span class="nav__pill">Live</span>
+            </a>
+            <a class="nav__item" href="#workers" data-view-link="workers">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-workers"></use></svg>
+                <span>Workers</span>
+              </span>
+            </a>
+            <a class="nav__item" href="#shift-scheduler" data-view-link="shift-scheduler">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-calendar"></use></svg>
+                <span>Shift Scheduler</span>
+              </span>
+            </a>
+            <a class="nav__item" href="#leave-and-shift-swaps" data-view-link="leave-and-shift-swaps">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-swap"></use></svg>
+                <span>Leave &amp; Shift Swaps</span>
+              </span>
+            </a>
+            <a class="nav__item" href="#ai-fatigue-prediction" data-view-link="ai-fatigue-prediction">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-brain"></use></svg>
+                <span>AI Fatigue Prediction</span>
+              </span>
+              <span class="nav__dot nav__dot--live"></span>
+            </a>
+            <a class="nav__item" href="#safety-alerts" data-view-link="safety-alerts">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-warning"></use></svg>
+                <span>Safety Alerts</span>
+              </span>
+              <span class="nav__count" data-alert-count>7</span>
+            </a>
+            <a class="nav__item" href="#reports-and-analytics" data-view-link="reports-and-analytics">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-chart"></use></svg>
+                <span>Reports &amp; Analytics</span>
+              </span>
+            </a>
+            <a class="nav__item" href="#settings" data-view-link="settings">
+              <span class="nav__label">
+                <svg class="icon"><use href="#i-settings"></use></svg>
+                <span>Settings</span>
+              </span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar__footer">
+          <div class="compliance-card">
+            <div class="compliance-card__top">
+              <span>Shift Compliance</span>
+              <strong>98.4%</strong>
+            </div>
+            <div class="progress">
+              <span style="width: 98.4%"></span>
+            </div>
+            <div class="compliance-card__meta">
+              <span>OSHA / ISO45001 Ready</span>
+              <svg class="icon icon--18"><use href="#i-verified"></use></svg>
+            </div>
+          </div>
+          <div class="sidebar-note">
+            <svg class="icon icon--16"><use href="#i-info"></use></svg>
+            <p>Predictions assist human managers. Final decisions remain manager responsibility.</p>
+          </div>
+          <div class="sidebar__links">
+            <button class="text-link" type="button" data-toast="Support center request opened.">
+              <svg class="icon icon--16"><use href="#i-help"></use></svg>
+              Support
+            </button>
+            <button class="text-link text-link--danger" type="button" data-toast="Log out is disabled in this demo.">
+              <svg class="icon icon--16"><use href="#i-logout"></use></svg>
+              Log Out
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="shell">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" type="button" id="menuToggle" aria-label="Open navigation">
+            <svg class="icon"><use href="#i-menu"></use></svg>
+          </button>
+
+          <button class="global-search" type="button" id="openSearch" aria-label="Search dashboard">
+            <svg class="icon"><use href="#i-search"></use></svg>
+            <span>Search workers, shifts, safety alerts, or AI insights...</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+
+          <div class="topbar__tools">
+            <div class="ai-status">
+              <span class="pulse-dot"></span>
+              <span>AI Engine: Active &amp; Monitoring</span>
+            </div>
+            <div class="db-status" id="dbStatus" data-state="connecting" title="Connecting to real-time database">
+              <i></i>
+              <span id="dbStatusLabel">Live DB</span>
+            </div>
+            <div class="segmented" role="group" aria-label="Dashboard perspective">
+              <button type="button" class="is-active" data-perspective="manager">Manager View</button>
+              <button type="button" data-perspective="worker">Worker View</button>
+            </div>
+            <button class="icon-button notification-button" type="button" id="openNotifications" aria-label="Open notifications">
+              <svg class="icon"><use href="#i-bell"></use></svg>
+              <span class="notification-badge" data-alert-count>7</span>
+            </button>
+            <button class="button button--primary button--topbar" type="button" id="openIncident">
+              <svg class="icon icon--18"><use href="#i-plus"></use></svg>
+              <span>Log Incident / Add Shift</span>
+            </button>
+            <button class="profile" type="button" id="openProfile" aria-label="Open profile menu">
+              <img src="assets/ananya-rao.png" alt="Ananya Rao" />
+              <span class="profile__copy">
+                <strong>Ananya Rao</strong>
+                <small>Safety &amp; Ops Director</small>
+              </span>
+            </button>
+          </div>
+        </header>
+
+        <main class="main" id="main">
+          <div class="view is-active" id="dashboardView" data-view="dashboard">
+            <section class="overview-card" aria-labelledby="pageTitle">
+              <div class="overview-card__copy">
+                <div class="overview-card__title">
+                  <h1 id="pageTitle">Operational Safety<br />&amp; Workforce<br />Overview</h1>
+                  <span class="live-pill"><i></i>Live Feed</span>
+                </div>
+                <p>
+                  Live monitoring across 4 facility zones
+                  <span class="dot-separator"></span>
+                  <span class="sync-copy">
+                    <svg class="icon icon--16"><use href="#i-sync"></use></svg>
+                    Last AI risk model sync: <span id="modelSync">2 mins ago</span>
+                  </span>
+                </p>
+              </div>
+
+              <div class="overview-card__actions">
+                <button class="select-button" type="button" data-popover="date">
+                  <svg class="icon icon--18"><use href="#i-calendar"></use></svg>
+                  <span id="dateRangeLabel">This Week: Oct 14 - Oct 20, 2024</span>
+                  <svg class="icon icon--16"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <button class="select-button" type="button" data-popover="plant">
+                  <svg class="icon icon--18"><use href="#i-factory"></use></svg>
+                  <span id="plantLabel">All Plants (North &amp; Central)</span>
+                  <svg class="icon icon--16"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <span class="action-divider"></span>
+                <button class="button button--soft" type="button" id="addWorkerTop">
+                  <svg class="icon icon--18"><use href="#i-person-add"></use></svg>
+                  <span>Add Worker</span>
+                </button>
+                <button class="button button--soft" type="button" id="assignShiftTop">
+                  <svg class="icon icon--18"><use href="#i-clock"></use></svg>
+                  <span>Assign Shift</span>
+                </button>
+                <button class="button button--danger-soft" type="button" id="jumpAlerts">
+                  <svg class="icon icon--18"><use href="#i-warning"></use></svg>
+                  <span>Alerts (<span data-alert-count>7</span>)</span>
+                </button>
+                <button class="button button--primary" type="button" id="generateReport">
+                  <svg class="icon icon--18"><use href="#i-file"></use></svg>
+                  <span>Generate Safety Report</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="kpi-grid" aria-label="Workforce metrics">
+              <article class="kpi-card">
+                <div class="kpi-card__top">
+                  <span>Total Workers</span>
+                  <span class="metric-icon"><svg class="icon icon--18"><use href="#i-engineering"></use></svg></span>
+                </div>
+                <div class="kpi-card__value">
+                  <strong data-total-workers>248</strong>
+                  <span class="trend trend--up">+4 this mo</span>
+                </div>
+                <div class="kpi-card__foot">
+                  <span>Compliance Rate</span>
+                  <strong>98% On-Duty</strong>
+                </div>
+              </article>
+
+              <article class="kpi-card">
+                <div class="kpi-card__top">
+                  <span>Active Shifts</span>
+                  <span class="metric-icon metric-icon--blue"><svg class="icon icon--18"><use href="#i-clock"></use></svg></span>
+                </div>
+                <div class="kpi-card__value">
+                  <strong data-active-shifts>86</strong>
+                  <span class="trend trend--muted">across 3 tiers</span>
+                </div>
+                <div class="kpi-card__foot kpi-card__foot--chips">
+                  <span>M: 48</span>
+                  <span>E: 26</span>
+                  <span>N: 12</span>
+                </div>
+              </article>
+
+              <article class="kpi-card">
+                <div class="kpi-card__top">
+                  <span>Pending Requests</span>
+                  <span class="metric-icon"><svg class="icon icon--18"><use href="#i-swap-horizontal"></use></svg></span>
+                </div>
+                <div class="kpi-card__value">
+                  <strong id="pendingMetric">12</strong>
+                  <span class="trend trend--muted">Action required</span>
+                </div>
+                <div class="kpi-card__foot">
+                  <span id="swapMetric">8 Swaps</span>
+                  <span>•</span>
+                  <span id="ptoMetric">4 PTO Reviews</span>
+                </div>
+              </article>
+
+              <article class="kpi-card kpi-card--critical">
+                <div class="kpi-card__top">
+                  <span>Safety Alerts</span>
+                  <span class="metric-icon metric-icon--red"><svg class="icon icon--18"><use href="#i-warning"></use></svg></span>
+                </div>
+                <div class="kpi-card__value">
+                  <strong class="danger-text" data-alert-count>7</strong>
+                  <span class="trend trend--danger">Action Urgent</span>
+                </div>
+                <div class="kpi-card__foot">
+                  <span><strong data-critical-count>3</strong> Critical</span>
+                  <span>•</span>
+                  <span><strong data-moderate-count>4</strong> Moderate</span>
+                </div>
+              </article>
+
+              <article class="kpi-card kpi-card--ai">
+                <div class="kpi-card__top">
+                  <span>Fatigue Risk <b>&gt;75</b></span>
+                  <span class="metric-icon metric-icon--cyan"><svg class="icon icon--18"><use href="#i-brain"></use></svg></span>
+                </div>
+                <div class="kpi-card__value">
+                  <strong>9</strong>
+                  <span class="trend trend--muted">Neural Model</span>
+                </div>
+                <div class="kpi-card__foot">
+                  <span>Urgent Rest Review</span>
+                  <span class="risk-flag">Flagged</span>
+                </div>
+              </article>
+            </section>
+
+            <div class="dashboard-grid">
+              <div class="dashboard-main">
+                <section class="card fatigue-card" aria-labelledby="fatigueTitle">
+                  <div class="card-heading fatigue-heading">
+                    <div>
+                      <h2 id="fatigueTitle">Workforce Fatigue Score vs<br />Overtime Hours</h2>
+                      <p>Mon – Sun telemetry aggregate tracking predictive threshold triggers across 4 active plants.</p>
+                    </div>
+                    <button class="confidence-tag" type="button" id="openConfidence">
+                      <svg class="icon icon--14"><use href="#i-sparkles"></use></svg>
+                      94% Confidence
+                    </button>
+                  </div>
+
+                  <div class="chart-legend" aria-hidden="true">
+                    <span><i class="legend-dot"></i>Fatigue Score (0-100)</span>
+                    <span><i class="legend-bar"></i>OT Hours Logged</span>
+                  </div>
+
+                  <div class="chart-well">
+                    <div class="chart-plot" id="fatigueChart">
+                      <svg viewBox="0 0 700 220" role="img" aria-label="Fatigue score and overtime hours from Monday to Sunday">
+                        <line class="threshold threshold--critical" x1="0" x2="700" y1="24" y2="24"></line>
+                        <text class="threshold-label threshold-label--critical" x="8" y="19">CRITICAL THRESHOLD (85)</text>
+                        <line class="threshold" x1="0" x2="700" y1="81" y2="81"></line>
+                        <text class="threshold-label" x="8" y="76">WARNING THRESHOLD (70)</text>
+                        <line class="threshold threshold--base" x1="0" x2="700" y1="181" y2="181"></line>
+                        <text class="threshold-label threshold-label--base" x="8" y="176">BASELINE (32)</text>
+
+                        <g class="overtime-bars">
+                          <rect x="38" y="165" width="46" height="45" rx="4"></rect>
+                          <rect x="134" y="149" width="46" height="61" rx="4"></rect>
+                          <rect x="230" y="122" width="46" height="88" rx="4"></rect>
+                          <rect x="326" y="85" width="46" height="125" rx="4"></rect>
+                          <rect x="422" y="59" width="46" height="151" rx="4" class="is-today"></rect>
+                          <rect x="518" y="36" width="46" height="174" rx="4" class="is-peak"></rect>
+                          <rect x="614" y="112" width="46" height="98" rx="4"></rect>
+                        </g>
+
+                        <path class="fatigue-line" d="M61 177 C 88 172, 117 166, 157 155 C 193 146, 217 136, 253 123 C 287 111, 315 102, 349 91 C 383 80, 409 70, 445 61 C 477 52, 502 39, 541 31 C 574 40, 602 107, 637 127" />
+                        <g class="fatigue-points">
+                          <circle cx="61" cy="177" r="4.5" data-day="Mon" data-score="34" data-overtime="42"></circle>
+                          <circle cx="157" cy="155" r="4.5" data-day="Tue" data-score="45" data-overtime="58"></circle>
+                          <circle cx="253" cy="123" r="4.5" data-day="Wed" data-score="59" data-overtime="86"></circle>
+                          <circle cx="349" cy="91" r="4.5" data-day="Thu" data-score="72" data-overtime="118"></circle>
+                          <circle cx="445" cy="61" r="4.5" data-day="Fri" data-score="84" data-overtime="139"></circle>
+                          <circle cx="541" cy="31" r="6" class="is-peak" data-day="Sat" data-score="92" data-overtime="162"></circle>
+                          <circle cx="637" cy="127" r="4.5" data-day="Sun" data-score="57" data-overtime="94"></circle>
+                        </g>
+                      </svg>
+                      <div class="chart-tooltip" id="chartTooltip" hidden>
+                        <strong></strong>
+                        <span></span>
+                      </div>
+                    </div>
+                    <div class="chart-days" aria-hidden="true">
+                      <span>Mon (14)</span>
+                      <span>Tue (15)</span>
+                      <span>Wed (16)</span>
+                      <span>Thu (17)</span>
+                      <span class="is-today">Fri (18)</span>
+                      <span class="is-peak">Sat (19) Peak</span>
+                      <span>Sun (20)</span>
+                    </div>
+                  </div>
+
+                  <div class="chart-summary">
+                    <div><span>Weekly Avg Score</span><strong>54.2</strong></div>
+                    <div><span>Total Overtime Logged</span><strong>142.5 hrs</strong></div>
+                    <div><span>Peak Critical Shift</span><strong class="danger-text">Sat Night (Zone C)</strong></div>
+                  </div>
+                </section>
+
+                <section class="card capacity-card" aria-labelledby="capacityTitle">
+                  <div class="card-heading card-heading--inline">
+                    <div>
+                      <h2 id="capacityTitle">Shift Distribution &amp; Real-Time Capacity</h2>
+                      <p>Overall on-time attendance is <strong>96.2%</strong> across current active rotations.</p>
+                    </div>
+                    <span class="soft-count">86 / 92 Stations Staffed</span>
+                  </div>
+
+                  <div class="shift-list">
+                    <article class="shift-row">
+                      <div class="shift-row__head">
+                        <div class="shift-row__title">
+                          <i class="shift-dot shift-dot--morning"></i>
+                          <strong>Morning Rotation (06:00 - 14:00)</strong>
+                          <span>Assembly, Pack &amp; Dispatch</span>
+                        </div>
+                        <strong>48 / 50 Assigned (96%)</strong>
+                      </div>
+                      <div class="progress progress--large"><span style="width: 96%"></span></div>
+                      <div class="shift-row__meta">
+                        <span>Attendance: 47 present • 1 delayed check-in</span>
+                        <span>Average Fatigue Index: 28 (Low)</span>
+                      </div>
+                    </article>
+
+                    <article class="shift-row">
+                      <div class="shift-row__head">
+                        <div class="shift-row__title">
+                          <i class="shift-dot shift-dot--evening"></i>
+                          <strong>Evening Rotation (14:00 - 22:00)</strong>
+                          <span>Heavy Fabrication &amp; QA</span>
+                        </div>
+                        <strong>26 / 28 Assigned (92%)</strong>
+                      </div>
+                      <div class="progress progress--large"><span class="progress--evening" style="width: 92%"></span></div>
+                      <div class="shift-row__meta">
+                        <span>Attendance: 25 present • 1 approved swap</span>
+                        <span>Average Fatigue Index: 46 (Moderate)</span>
+                      </div>
+                    </article>
+
+                    <article class="shift-row">
+                      <div class="shift-row__head">
+                        <div class="shift-row__title">
+                          <i class="shift-dot shift-dot--night"></i>
+                          <strong>Night Rotation (22:00 - 06:00)</strong>
+                          <span>Cold Storage &amp; Maintenance</span>
+                        </div>
+                        <strong class="danger-text">12 / 14 Assigned (85%) - Capacity Deficit</strong>
+                      </div>
+                      <div class="progress progress--large"><span class="progress--night" style="width: 85.7%"></span></div>
+                      <div class="shift-row__meta shift-row__meta--danger">
+                        <span>Understaffing risk in Cold Storage Zone B</span>
+                        <span>Average Fatigue Index: 74 (High)</span>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="card roster-card" aria-labelledby="rosterTitle">
+                  <div class="card-heading card-heading--inline">
+                    <div class="heading-with-icon">
+                      <svg class="icon icon--22"><use href="#i-alarm"></use></svg>
+                      <h2 id="rosterTitle">Next 12 Hours: Critical Shifts &amp; Risk Preview</h2>
+                    </div>
+                    <button class="text-link text-link--blue" type="button" data-roster>
+                      View Full Roster
+                      <svg class="icon icon--16"><use href="#i-chevron-right"></use></svg>
+                    </button>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Shift &amp; Time</th>
+                          <th>Facility Area</th>
+                          <th>Staffed / Target</th>
+                          <th>Predicted Risk</th>
+                          <th>Mitigation Directive</th>
+                          <th class="align-right">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Evening Shift B</strong><span>14:00 - 22:00</span></td>
+                          <td>Stamping &amp; Presses (Plant 1)</td>
+                          <td class="nowrap">18 / 18</td>
+                          <td><span class="risk-pill risk-pill--low"><i></i>Low (24)</span></td>
+                          <td>Standard hydration &amp; ergonomic break</td>
+                          <td class="align-right"><button class="table-action" type="button" data-shift-details="Evening Shift B">Details</button></td>
+                        </tr>
+                        <tr class="row--critical">
+                          <td><strong>Night Line Prep</strong><span>22:00 - 06:00</span></td>
+                          <td>Cold Storage (Zone B)</td>
+                          <td class="nowrap danger-text"><strong>2 / 4 Forklifts</strong></td>
+                          <td><span class="risk-pill risk-pill--high"><i></i>High (88)</span></td>
+                          <td class="danger-text">Require standby relief dispatch</td>
+                          <td class="align-right"><button class="button button--mini" type="button" id="fillShift">Fill Shift</button></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Overnight Maintenance</strong><span>23:00 - 07:00</span></td>
+                          <td>Robotics Bay 4</td>
+                          <td class="nowrap">6 / 6</td>
+                          <td><span class="risk-pill risk-pill--medium"><i></i>Moderate (62)</span></td>
+                          <td>Mandate micro-break at 03:30 AM</td>
+                          <td class="align-right"><button class="table-action" type="button" data-shift-details="Overnight Maintenance">Review</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="dashboard-side" aria-label="AI recommendations and active alerts">
+                <section class="ai-card" aria-labelledby="aiCardTitle">
+                  <div class="ai-card__top">
+                    <span class="ai-card__label">
+                      <svg class="icon icon--20"><use href="#i-robot"></use></svg>
+                      AI Dispatch Assistant
+                    </span>
+                    <span class="ai-version">v4.2 Active</span>
+                  </div>
+                  <h2 id="aiCardTitle">3 Critical Workload Imbalances Detected</h2>
+                  <p>High overtime accumulation in Plant 1 &amp; Cold Storage exceeds safe cognitive thresholds. Shift rebalancing can eliminate <strong>78%</strong> of critical fatigue incidents before 22:00.</p>
+                  <div class="ai-benefits">
+                    <div><span>Fatigue Exposure Reduction</span><strong>-42%</strong></div>
+                    <div><span>Overtime Penalty Savings</span><strong>$3,420 / wk</strong></div>
+                  </div>
+                  <button class="button button--white button--full" type="button" id="rebalanceShifts">
+                    <svg class="icon icon--20"><use href="#i-sparkles"></use></svg>
+                    <span>Auto-Rebalance Shifts with AI</span>
+                  </button>
+                </section>
+
+                <section class="card alerts-card" id="alertsSection" aria-labelledby="alertsTitle">
+                  <div class="card-heading card-heading--inline alerts-heading">
+                    <div class="heading-with-icon">
+                      <svg class="icon icon--22 dangerous"><use href="#i-warning"></use></svg>
+                      <h2 id="alertsTitle">Active Safety Stream</h2>
+                    </div>
+                    <span class="live-count"><span data-alert-count>7</span> Live</span>
+                  </div>
+
+                  <div class="alert-list" id="alertList">
+                    <article class="alert-item alert-item--critical" data-alert-id="arjun">
+                      <div class="alert-item__top">
+                        <p><strong>Arjun Mehta</strong> <span>(Forklift Op - Plant 1)</span></p>
+                        <span class="alert-chip alert-chip--danger">Risk 88/100</span>
+                      </div>
+                      <p class="alert-item__copy">14h consecutive duty window. Sensor metrics indicate reaction time decay (+340ms).</p>
+                      <div class="alert-item__foot">
+                        <span class="alert-action"><svg class="icon icon--14"><use href="#i-bolt"></use></svg>Action: Dispatch Relief</span>
+                        <button class="button button--mini-neutral" type="button" data-resolve-alert="arjun">Swap Now</button>
+                      </div>
+                    </article>
+
+                    <article class="alert-item alert-item--critical" data-alert-id="sneha">
+                      <div class="alert-item__top">
+                        <p><strong>Sneha Iyer</strong> <span>(Assembly Line 2)</span></p>
+                        <span class="alert-chip alert-chip--danger">Rest Deficit</span>
+                      </div>
+                      <p class="alert-item__copy">Insufficient rest turnaround: scheduled 6.5 hrs between evening &amp; morning shifts (Min: 11 hrs OSHA).</p>
+                      <div class="alert-item__foot">
+                        <span class="alert-note">Delay Start to 10:00 AM</span>
+                        <button class="button button--mini-neutral" type="button" data-resolve-alert="sneha">Adjust Start</button>
+                      </div>
+                    </article>
+
+                    <article class="alert-item alert-item--info" data-alert-id="vikram">
+                      <div class="alert-item__top">
+                        <p><strong>Vikram Singh</strong> <span>(Maintenance Tech)</span></p>
+                        <span class="alert-chip alert-chip--blue">Night Limit</span>
+                      </div>
+                      <p class="alert-item__copy">5th consecutive night shift limit reached. Circadian strain model indicates severe micro-sleep risk.</p>
+                      <div class="alert-item__foot">
+                        <span class="alert-note">Rotate to Day Off</span>
+                        <button class="button button--mini-neutral" type="button" data-resolve-alert="vikram">Approve Rest</button>
+                      </div>
+                    </article>
+
+                    <article class="alert-item alert-item--critical" data-alert-id="coldstorage">
+                      <div class="alert-item__top">
+                        <p><strong>Cold Storage Zone B</strong> <span>(Logistics)</span></p>
+                        <span class="alert-chip alert-chip--danger">Deficit: 2 Cert</span>
+                      </div>
+                      <p class="alert-item__copy">Only 2 certified cold-storage forklift drivers on duty for upcoming 80-ton shipment receiving.</p>
+                      <div class="alert-item__foot">
+                        <span class="alert-note alert-note--danger">Overwork Danger</span>
+                        <button class="button button--mini-neutral" type="button" data-resolve-alert="coldstorage">Call Standby</button>
+                      </div>
+                    </article>
+                  </div>
+
+                  <button class="alerts-all" type="button" id="showAllAlerts">View All <span data-alert-count>7</span> Safety Notifications →</button>
+                </section>
+
+                <section class="policy-card" aria-label="Human dispatch authority policy">
+                  <svg class="icon icon--20"><use href="#i-verified"></use></svg>
+                  <div>
+                    <strong>Human Dispatch Authority Policy</strong>
+                    <p>AI estimates are non-diagnostic decision-support tools. Plant supervisors and EHS officers retain final dispatch, rostering, and medical suspension authority.</p>
+                  </div>
+                </section>
+              </aside>
+            </div>
+          </div>
+
+          <div class="view" id="secondaryView" hidden></div>
+        </main>
+      </div>
+    </div>
+
+    <div class="overlay" id="modalOverlay" hidden>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <header class="modal-card__header">
+          <div>
+            <span class="eyebrow" id="modalEyebrow">SafeShift AI</span>
+            <h2 id="modalTitle">Dialog</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal aria-label="Close dialog">
+            <svg class="icon"><use href="#i-x"></use></svg>
+          </button>
+        </header>
+        <div class="modal-card__body" id="modalBody"></div>
+        <footer class="modal-card__footer" id="modalFooter"></footer>
+      </section>
+    </div>
+
+    <div class="overlay overlay--drawer" id="drawerOverlay" hidden>
+      <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+        <header class="drawer__header">
+          <div>
+            <span class="eyebrow" id="drawerEyebrow">Live operations</span>
+            <h2 id="drawerTitle">Notifications</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-drawer aria-label="Close drawer">
+            <svg class="icon"><use href="#i-x"></use></svg>
+          </button>
+        </header>
+        <div class="drawer__body" id="drawerBody"></div>
+      </aside>
+    </div>
+
+    <div class="overlay overlay--command" id="searchOverlay" hidden>
+      <section class="command-card" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+        <h2 class="sr-only" id="commandTitle">Search SafeShift AI</h2>
+        <label class="command-search">
+          <svg class="icon icon--20"><use href="#i-search"></use></svg>
+          <input id="commandInput" type="search" autocomplete="off" placeholder="Search workers, shifts, alerts, or AI insights..." />
+          <kbd>Esc</kbd>
+        </label>
+        <div class="command-results" id="commandResults"></div>
+        <footer class="command-footer">
+          <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+          <span><kbd>Enter</kbd> Open</span>
+          <span>SafeShift AI Command</span>
+        </footer>
+      </section>
+    </div>
+
+    <div class="popover" id="datePopover" hidden>
+      <button type="button" data-period="This Week: Oct 14 - Oct 20, 2024">This week</button>
+      <button type="button" data-period="Next Week: Oct 21 - Oct 27, 2024">Next week</button>
+      <button type="button" data-period="Last 30 Days: Sep 21 - Oct 20, 2024">Last 30 days</button>
+    </div>
+
+    <div class="popover" id="plantPopover" hidden>
+      <button type="button" data-plant="All Plants (North &amp; Central)">All plants</button>
+      <button type="button" data-plant="Plant 1 — Assembly &amp; Presses">Plant 1</button>
+      <button type="button" data-plant="Plant 2 — Cold Storage">Plant 2</button>
+      <button type="button" data-plant="Plant 3 — Robotics">Plant 3</button>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="false"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

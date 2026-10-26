@@ -1,0 +1,13 @@
+{
+  "name": "safeshift-ai-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SafeShift AI predictive workforce safety dashboard with a local real-time database.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
